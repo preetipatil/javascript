@@ -11,16 +11,16 @@
 // -----Exercise Template Strings-----
 //****************************************************************
 
-var name = "Tom";
-var ordno= 12455;
-var total = 300.50;
-var msg = "Hello, "+name+" your \
+const name = "Tom";
+const ordno= 12455;
+const total = 300.50;
+const msg = "Hello, "+name+" your \
 order("+ordno+") was :£"+total+".";
 
 console.log(msg); //Hello, Tom your order(12455) was :£300.5.
 
 
-var msg1 =
+const msg1 =
   `Hello, ${name},  your
 order(${ordno}) was :£${total}.`;
 
@@ -34,7 +34,7 @@ console.log(msg1);//Hello, Tom,  your
 //****************************************************************
 
 function upper(strings,...values) {
-  var str = "";
+  let str = "";
   for (let i=0; i<strings.length; i++) {
     if (i > 0) {
       if(typeof(values[i-1]) === "string"){
@@ -48,7 +48,7 @@ function upper(strings,...values) {
   return str;
 }
 
-var msg2 =
+const msg2 =
   upper`Hello, ${name},  your
 order(${ordno}) was :£${total}.`;
 
@@ -63,7 +63,7 @@ console.log(msg2); //Hello, TOM,  your
 
 
 function allItems(item1, ...rest){
-  for(var i=0;i<rest.length;i++){
+  for(let i=0;i<rest.length;i++){
     console.log(rest[i]);  // Milk Tea 101 102 103 104
   }
 }
@@ -79,35 +79,77 @@ function startFarm(str1,str2,str3){
   console.log(str1,str2,str3)
 }
 
-var farm = "Myfarm";
+const farm = "Myfarm";
 
 startFarm(...farm); // M y f
 
-var animals = ["sheep", "cow", "pig", "dog"];
+const animals = ["sheep", "cow", "pig", "dog"];
 
 startFarm(...animals); // sheep cow pig
+
+//EXAMPLE 
+/****************************************************************/
+//Array - Spread operator
+/****************************************************************/
+
+const farmAnimal = 
+["Cow", "Pig", "Sheep"];
+const zooAnimal = ["Monkey", "Tigher", "Elephant"];
+
+const allAnimal = [...farmAnimal, "Dog", 
+"Cat", "rabbit", ...zooAnimal];
+
+console.log(allAnimal);
+
+// const myToyCollection = allAnimal;
+
+// myToyCollection[2] = "lamb";
+
+// console.log(myToyCollection);
+// //["Cow", "Pig", "Sheep", "Dog", "Cat", "rabbit", "Monkey", "Tigher", "Elephant"]
+
+
+// console.log(allAnimal);
+//["Cow", "Pig", "Sheep", "Dog", "Cat", "rabbit", "Monkey", "Tigher", "Elephant"]
+//AHH Its the same as myToyCollection
+//because it is referanceinf on line 104 // const myToyCollection = allAnimal;
+
+//so we can do is
+
+const myToyCollection = [...allAnimal];
+
+myToyCollection[2] = "lamb";
+
+console.log(myToyCollection);
+//["Cow", "Pig", "Sheep", "Dog", "Cat", "rabbit", "Monkey", "Tigher", "Elephant"]
+
+
+console.log(allAnimal);
+//["Cow", "Pig", "Sheep", "Dog", "Cat", "rabbit", "Monkey", "Tigher", "Elephant"]
+
+/****************************************************************/
 
 //****************************************************************
 // -----Exercise Destructuring arrays-----
 //****************************************************************
 
 
-var busNos = [474,475,476,477];
+const busNos = [474,475,476,477];
 
-var [bus1,bus2]= busNos;
+const [bus1,bus2]= busNos;
 
 console.log(bus1, bus2); //474 475
 
 
 // --------
-var [bs1,...restBuses] = busNos;
+const [bs1,...restBuses] = busNos;
 
 console.log(restBuses); //[475,476,477]
 
 
 // ---remove first 2 elements fromn array
 
-var [,,...removeTwo] = busNos;
+const [,,...removeTwo] = busNos;
 
 console.log(removeTwo); //[476,477]
 
@@ -116,7 +158,7 @@ console.log(removeTwo); //[476,477]
 //****************************************************************
 
 //var vid,type,company,make,color;
-var car = {
+const car = {
   vid: 123,
   type: "convertible",
   company: "BMW",
@@ -124,7 +166,7 @@ var car = {
   color:"blue"
 }
 
-var {vid,type,company,make,color} = car;
+const {vid,type,company,make,color} = car;
 
 console.log(company, make,color); // BMW X3 blue
 
@@ -138,7 +180,7 @@ console.log(company, make,color); // BMW X3 blue
 })();
 
 
-var first = (function(){
+const first = (function(){
   console.log("Welcome in function IIFE");    //Welcome in function IIFE
 })();
 
@@ -148,21 +190,21 @@ var first = (function(){
 //-----Exercise Closures -----
 //****************************************************************
 
-var myClosure =  function(){
-  var inc = 707;
+const myClosure =  function(){
+  let inc = 707;
   return function(){
     return inc += 1;
   }
 };
 
-var count = myClosure();
+const count = myClosure();
 console.log(count()); //708
 
 //****************************************************************
 //----- Exercise THIS with object-----
 //****************************************************************
 
-var sheep = {
+const sheep = {
   name: "becky",
   code: 112,
   getCode: function(){
@@ -170,7 +212,7 @@ var sheep = {
   }
 };
 
-var cow = {
+const cow = {
   name: "moohi",
   code: 221,
   getCode: function(prefix){
@@ -185,7 +227,7 @@ console.log(cow.getCode("B")); //B221
 //----- CALL-----
 //****************************************************************
 
-var lamb = {
+const lamb = {
   name: "baby",
   code:4112
 };
@@ -196,7 +238,7 @@ console.log(sheep.getCode.call(lamb)); //4112
 //----- APPLY-----
 //****************************************************************
 
-var calf  = {
+const calf  = {
   name:"caffee",
   code:334
 };
@@ -211,9 +253,9 @@ console.log(cow.getCode.apply(calf ,["baby"]));//baby334
 // call and apply will not make copy of function, It will only call the functiom
 // bind will make copy of function and we can call it
 
-var goat = {name:"Gii", code:101};
+const goat = {name:"Gii", code:101};
 
-var functionBind = sheep.getCode.bind(goat); //functionBind is brand new function for obj goat
+const functionBind = sheep.getCode.bind(goat); //functionBind is brand new function for obj goat
 
 console.log(functionBind()); //101
 
@@ -228,7 +270,7 @@ function Animal(animalID){
   };
 }
 
-var dog = new Animal(555);//constuctor function
+const dog = new Animal(555);//constuctor function
 dog.getCode() //Code: 555
 
 //If we create 100000 objects of Animal,
@@ -251,7 +293,7 @@ NewAnimal.prototype.getCode = function(){
   console.log("Code: " + this.code);
 }
 
-var cat = new NewAnimal(666);
+const cat = new NewAnimal(666);
 cat.getCode();// Code: 666
 
 //Expanding objects using prototype
@@ -265,21 +307,21 @@ cat.appendPrefix(); // Batch: 666
 //----- Array Methods-----
 //****************************************************************
 
-var valueArray = [1,2,3,4,5];
-var double = x => x * 2;
+const valueArray = [1,2,3,4,5];
+const double = x => x * 2;
 
 // map
 console.log(valueArray.map(double)); //[2,4,6,8,10]
 
-var triple = x => x * 3;
+const triple = x => x * 3;
 
 console.log(valueArray.map(triple));//[3,6,9,12,15]
 
-var greaterThan10 = x => x > 10;
+const greaterThan10 = x => x > 10;
 console.log([1,2,3,4,5,12,34,43].filter(greaterThan10));//[12,34,43]
 
 
-var animalData = [
+const animalData = [
   {name:"coco", type:"dog", code:111},
   {name:"meow", type:"cat", code:151},
   {name:"baa", type:"sheep", code:211},
@@ -290,16 +332,39 @@ var animalData = [
 animalData.forEach(animal => console.log(animal));
 
 //filter
-var getDogs= animalData.filter( animal => animal.type === "dog"); // {name:"coco", type:"dog", code:111} {name:"scooby", type:"dog", code:311}
+const getDogs= animalData.filter( animal => animal.type === "dog"); // {name:"coco", type:"dog", code:111} {name:"scooby", type:"dog", code:311}
 
 console.log(getDogs);
 
 //find - finds only first match and returns
-var getCodeGreaterThan200 = animalData.find(
+const getCodeGreaterThan200 = animalData.find(
   animal => animal.code > 200
 );
 
 console.log(getCodeGreaterThan200);// {name:"baa", type:"sheep", code:211}
 
+/****************************************************************/
+//Generators
+/****************************************************************/
+function* myNewGenerator(){
+    console.log("Hi i m 1 ");
+    yield "1";
+    console.log("after me");
+    yield "3";
+}
+
+
+let aGen =  myNewGenerator();
+aGen.next();
+// Hi i m 1 
+//{value: "1", done: false}
+aGen.next();
+//after me
+{//value: "3", done: false}
+aGen.next();
+//{value: undefined, done: true}
+
+
 //****************************************************************
+/****************************************************************/
 
